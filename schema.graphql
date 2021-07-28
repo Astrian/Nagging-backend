@@ -1,0 +1,13 @@
+"Included scalars"
+scalar JSON
+scalar Upload
+
+type Query {
+  getUsers: [Users]!
+}
+
+type Users {
+  uuid: String!,
+  username: String!,
+  fullname: String!
+}
