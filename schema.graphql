@@ -3,10 +3,10 @@ scalar JSON
 scalar Upload
 
 type Query {
-  getUsers: [Users]!
+  user(username: String, uuid: String): User
 }
 
-type Users {
+type User {
   uuid: String!,
   username: String!,
   fullname: String!
