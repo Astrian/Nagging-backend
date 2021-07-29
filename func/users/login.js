@@ -1,24 +1,19 @@
 const util = require('../../util')
 const bcrypt = require('bcrypt')
 const { v4: uuidv4 } = require('uuid')
+const { ApolloError, AuthenticationError } = require('apollo-server-errors')
 
 module.exports = async (args) => {
   // Check username and get user details
   let res = await util.mongodb.read('users', {username: args.username})
   if (!res.length) {
-    throw new Error(JSON.stringify({
-      info: `We cannot find user in this username.`,
-      code: `USER_FINDING_NOT_EXIST`
-    }))
+    throw new ApolloError(`We cannot find a user with this username.`, `RESOURCE_NOT_FOUND`)
   }
   res = res[0]
   
   // Check password
   if (!(await checkPassword(args.password, res.password))) {
-    throw new Error(JSON.stringify({
-      info: `The password with this user is not matched.`,
-      code: `PASSWORD_INCORRECT`
-    }))
+    throw new AuthenticationError(`The password you input is not match to the account.`)
   }
 
   // Set device name

@@ -1,14 +1,12 @@
 const util = require('../../util')
 const bcrypt = require('bcrypt')
 const { v4: uuidv4 } = require('uuid')
+const { ApolloError } = require('apollo-server-errors')
 
 module.exports = async (args) => {
   // Check does a user existed in this server
   let res = await util.mongodb.read('users', {})
-  if (res.length) throw new Error(JSON.stringify({
-    info: `This server is user-existed.`,
-    code: `USER_EXIST`
-  }))
+  if (res.length) throw new ApolloError(`This server is user-existed.`, `USER_ALREADY_EXIST`)
 
   // Assign a UUID
   args.uuid = await assignUUID()

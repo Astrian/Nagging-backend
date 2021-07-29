@@ -10,34 +10,16 @@ const typeDefs = fs.readFileSync(path.resolve(__dirname, './schema.graphql'), { 
 const resolvers = {
   Query: {
     user: async (parent, args) => {
-      try {
-        res = await func.users.getUsers(args.username, args.uuid)
-      } catch (e) {
-        console.log(e)
-        throw new ApolloError('Server running error', 'SERVER_RUNNING_ERROR')
-      }
-      return res
+      return await func.users.getUsers(args.username, args.uuid)
     }
   },
   Mutation: {
     createUser: async (parent, args) => {
-      try { 
-        await func.users.createUser(args) 
-      } catch (e) { 
-        e.message = JSON.parse(e.message)
-        throw new ApolloError(e.message.info, e.message.code) 
-      }
+      await func.users.createUser(args) 
       return
     },
     login: async (parent, args) => {
-      let cookie
-      try {
-        cookie = await func.users.login(args) 
-      } catch (e) {
-        console.log(e)
-        e.message = JSON.parse(e.message)
-        throw new ApolloError(e.message.info, e.message.code) 
-      }
+      let cookie = await func.users.login(args) 
       return cookie
     },
     postNagging: async (parent, args, context) => {
