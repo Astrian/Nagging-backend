@@ -9,9 +9,6 @@ const typeDefs = fs.readFileSync(path.resolve(__dirname, './schema.graphql'), { 
 const resolvers = {
   Query: {
     user: async (parent, args) => {
-      if (args.username && args.uuid) throw new UserInputError('You can only input either username or uuid.')
-      if (!args.username && !args.uuid) throw new UserInputError('You must input either username or uuid.')
-      let res
       try {
         res = await func.users.getUsers(args.username, args.uuid)
       } catch (e) {

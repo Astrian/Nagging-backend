@@ -3,7 +3,7 @@ scalar JSON
 scalar Upload
 
 type Query {
-  user(username: String, uuid: String): User
+  user: User
 }
 
 type User {
