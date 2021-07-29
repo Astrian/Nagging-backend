@@ -4,7 +4,7 @@ scalar Upload
 
 type Query {
   user: User,
-  naggings(pager: Int): [Nagging],
+  naggings(pager: Int): naggingList!,
   signalNagging(uuid: String!): Nagging
 }
 
@@ -32,4 +32,9 @@ type Nagging {
   content: String!,
   time: Float!,
   author: User
+}
+
+type naggingList {
+  list: [Nagging],
+  next: Boolean!
 }
