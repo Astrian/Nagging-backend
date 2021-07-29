@@ -27,11 +27,29 @@ const resolvers = {
         throw new ApolloError(e.message.info, e.message.code) 
       }
       return
+    },
+    login: async (parent, args, context, info) => {
+      let cookie
+      try {
+        cookie = await func.users.login(args) 
+      } catch (e) {
+        console.log(e)
+        e.message = JSON.parse(e.message)
+        throw new ApolloError(e.message.info, e.message.code) 
+      }
+      return cookie
     }
   }
 }
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => {
+    const session = req.headers.cookie || ''
+    return { session }
+  }
+})
 
 server.listen(3000).then(({ url }) => {
   console.log(`Server ready at ${url}`)

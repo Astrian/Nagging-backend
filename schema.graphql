@@ -7,11 +7,18 @@ type Query {
 }
 
 type Mutation {
-  createUser(username: String!, password: String!, email: String!, bio: String): String
+  createUser(username: String!, password: String!, email: String!, bio: String): String,
+  login(username: String!, password: String!, deviceName: String): Session!
 }
 
 type User {
   uuid: String!,
   username: String!,
-  fullname: String!
+  fullname: String!,
+  bio: String
+}
+
+type Session {
+  user: String!,
+  key: String!
 }

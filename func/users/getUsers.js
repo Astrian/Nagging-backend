@@ -1,7 +1,8 @@
 const util = require('../../util')
 
-module.exports = async (username, uuid) => {
+module.exports = async () => {
   let res = await util.mongodb.read("users", {})
   if (!res.length) throw new Error(`Cannot find the user`)
-  return res[0]
+  let {username, fullname, uuid, bio} = res[0]
+  return { username, fullname, uuid, bio}
 }
