@@ -8,7 +8,8 @@ type Query {
 
 type Mutation {
   createUser(username: String!, password: String!, email: String!, bio: String): String,
-  login(username: String!, password: String!, deviceName: String): Session!
+  login(username: String!, password: String!, deviceName: String): Session!,
+  postNagging(content: String!): Nagging!
 }
 
 type User {
@@ -21,4 +22,11 @@ type User {
 type Session {
   user: String!,
   key: String!
+}
+
+type Nagging {
+  uuid: String!,
+  content: String!,
+  time: Int!,
+  author: String!
 }

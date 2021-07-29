@@ -1,3 +1,5 @@
 module.exports = {
-  users: require('./users')
+  users: require('./users'),
+  naggings: require('./naggings'),
+  checkSession: require('./checkSession')
 }
