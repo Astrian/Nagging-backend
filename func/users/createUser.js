@@ -16,6 +16,9 @@ module.exports = async (args) => {
   // Hash password
   args.password = await hashPassword(args.password)
 
+  // Administrator identify
+  args.identify = '1'
+
   // Write user into database
   await util.mongodb.write('users', [args])
   return
