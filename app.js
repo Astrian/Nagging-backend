@@ -17,6 +17,17 @@ const resolvers = {
       }
       return res
     }
+  },
+  Mutation: {
+    createUser: async (parent, args) => {
+      try {
+        res = await func.users.createUser(args)
+      } catch (e) {
+        console.log(e)
+        throw new ApolloError('Server running error', 'SERVER_RUNNING_ERROR')
+      }
+      return 'ok'
+    }
   }
 }
 
