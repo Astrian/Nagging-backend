@@ -4,7 +4,8 @@ scalar Upload
 
 type Query {
   user: User,
-  naggings(pager: Int): [Nagging]
+  naggings(pager: Int): [Nagging],
+  signalNagging(uuid: String!): Nagging
 }
 
 type Mutation {
@@ -29,5 +30,5 @@ type Nagging {
   uuid: String!,
   content: String!,
   time: Float!,
-  author: String!
+  author: User
 }

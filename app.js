@@ -12,6 +12,10 @@ const resolvers = {
     },
     naggings: async (parent, args) => {
       return await func.naggings.getList(args.pager)
+    },
+    signalNagging: async (parent, args) => {
+      console.log(args.uuid)
+      return await func.naggings.getSingle(args.uuid)
     }
   },
   Mutation: {
