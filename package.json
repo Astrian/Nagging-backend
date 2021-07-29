@@ -19,7 +19,9 @@
   "dependencies": {
     "apollo-server": "^3.0.2",
     "apollo-server-errors": "^3.0.1",
+    "bcrypt": "^5.0.1",
     "graphql": "^15.5.1",
-    "mongodb": "^4.0.1"
+    "mongodb": "^4.0.1",
+    "uuid": "^8.3.2"
   }
 }
