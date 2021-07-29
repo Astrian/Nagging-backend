@@ -2,8 +2,6 @@ const { ApolloServer, gql } = require('apollo-server')
 const fs = require('fs')
 const path = require('path')
 const func = require('./func')
-const {ApolloError, UserInputError } = require('apollo-server-errors')
-const { Console } = require('console')
 
 const typeDefs = fs.readFileSync(path.resolve(__dirname, './schema.graphql'), { encoding: 'utf8' })
 
@@ -11,6 +9,9 @@ const resolvers = {
   Query: {
     user: async (parent, args) => {
       return await func.users.getUsers(args.username, args.uuid)
+    },
+    naggings: async (parent, args) => {
+      return await func.naggings.getList(args.pager)
     }
   },
   Mutation: {

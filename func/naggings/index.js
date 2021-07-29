@@ -1,3 +1,4 @@
 module.exports = {
-  new: require('./new')
+  new: require('./new'),
+  getList: require('./getList')
 }

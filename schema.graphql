@@ -3,7 +3,8 @@ scalar JSON
 scalar Upload
 
 type Query {
-  user: User
+  user: User,
+  naggings(pager: Int): [Nagging]
 }
 
 type Mutation {
@@ -27,6 +28,6 @@ type Session {
 type Nagging {
   uuid: String!,
   content: String!,
-  time: Int!,
+  time: Float!,
   author: String!
 }
