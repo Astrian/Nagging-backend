@@ -19,6 +19,9 @@ module.exports = async (args) => {
   // Administrator identify
   args.identify = 1
 
+  // Write default fullname
+  args.fullname = args.username
+
   // Write user into database
   await util.mongodb.write('users', [args])
   return
