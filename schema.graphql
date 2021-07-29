@@ -11,7 +11,8 @@ type Query {
 type Mutation {
   createUser(username: String!, password: String!, email: String!, bio: String): String,
   login(username: String!, password: String!, deviceName: String): Session!,
-  postNagging(content: String!): Nagging!
+  postNagging(content: String!): Nagging!,
+  deleteNagging(uuid: String!): String
 }
 
 type User {

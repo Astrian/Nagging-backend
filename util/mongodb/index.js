@@ -1,4 +1,5 @@
 module.exports = {
   read: require('./read'),
-  write: require('./write')
+  write: require('./write'),
+  delete: require('./delete')
 }

@@ -14,7 +14,6 @@ const resolvers = {
       return await func.naggings.getList(args.pager)
     },
     signalNagging: async (parent, args) => {
-      console.log(args.uuid)
       return await func.naggings.getSingle(args.uuid)
     }
   },
@@ -30,6 +29,12 @@ const resolvers = {
     postNagging: async (parent, args, context) => {
       await func.checkSession(context.session)
       return await func.naggings.new(args.content, context.session.user)
+    },
+    deleteNagging: async (parent, args, context) => {
+      console.log(context)
+      await func.checkSession(context.session)
+      await func.naggings.delete(args.uuid, context.session.user)
+      return
     }
   }
 }
