@@ -14,7 +14,8 @@ type Mutation {
   postNagging(content: String!): Nagging!,
   deleteNagging(uuid: String!): String,
   logout: String,
-  editProfile(username: String, fullname: String, bio: String): String
+  editProfile(username: String, fullname: String, bio: String): String,
+  changePassword(oriPwd: String!, newPwd: String!): String
 }
 
 type User {

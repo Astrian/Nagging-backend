@@ -3,5 +3,6 @@ module.exports = {
   createUser: require('./createUser'),
   login: require('./login'),
   logout: require('./logout'),
-  editProfile: require('./editProfile')
+  editProfile: require('./editProfile'),
+  changePassword: require('./changePassword')
 }

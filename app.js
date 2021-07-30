@@ -46,6 +46,10 @@ const resolvers = {
     editProfile: async (parent, args, context) => {
       let user = await func.checkSession(context.session)
       return await func.users.editProfile(args, user)
+    },
+    changePassword: async (parent, args, context) => {
+      let user = await func.checkSession(context.session)
+      return await func.users.changePassword(user, args)
     }
   }
 }
