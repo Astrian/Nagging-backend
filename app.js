@@ -2,6 +2,8 @@ const { ApolloServer, gql } = require('apollo-server')
 const fs = require('fs')
 const path = require('path')
 const func = require('./func')
+const httpHeadersPlugin = require("apollo-server-plugin-http-headers")
+const urldecode = require('urldecode')
 
 const typeDefs = fs.readFileSync(path.resolve(__dirname, './schema.graphql'), { encoding: 'utf8' })
 
@@ -22,9 +24,10 @@ const resolvers = {
       await func.users.createUser(args) 
       return
     },
-    login: async (parent, args) => {
+    login: async (parent, args, context) => {
       let cookie = await func.users.login(args) 
-      return cookie
+      context.setCookies.push({name: "session", value: `${cookie.user}, ${cookie.key}`})
+      return 
     },
     postNagging: async (parent, args, context) => {
       await func.checkSession(context.session)
@@ -42,15 +45,19 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  plugins: [httpHeadersPlugin],
   context: ({ req }) => {
     let cookieRaw = req.headers.cookie || ''
     let cookie = cookieRaw.split('; ')
     let session = {}
     for(let i in cookie) {
-      if (cookie[i].split('=')[0] === 'key') session.key = cookie[i].split('=')[1]
-      if (cookie[i].split('=')[0] === 'user') session.user = cookie[i].split('=')[1]
+      if (cookie[i].split('=')[0] === 'session') {
+        let sessionRaw = urldecode(cookie[i].split('=')[1])
+        session.user = sessionRaw.split(', ')[0]
+        session.key = sessionRaw.split(', ')[1]
+      }
     }
-    return { session }
+    return { session, setCookies: new Array(), setHeaders: new Array() }
   }
 })
 
