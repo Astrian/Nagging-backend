@@ -5,6 +5,8 @@ const func = require('./func')
 const httpHeadersPlugin = require("apollo-server-plugin-http-headers")
 const urldecode = require('urldecode')
 
+const port = process.env.PORT || 4000
+
 const typeDefs = fs.readFileSync(path.resolve(__dirname, './schema.graphql'), { encoding: 'utf8' })
 
 const resolvers = {
@@ -79,6 +81,6 @@ const server = new ApolloServer({
   }
 })
 
-server.listen(3000).then(({ url }) => {
+server.listen(port).then(({ url }) => {
   console.log(`Server ready at ${url}`)
 })
