@@ -42,6 +42,10 @@ const resolvers = {
       let user = await func.checkSession(context.session)
       context.setCookies.push({name: "session", value: null})
       return await func.users.logout(context.session.uuid, user)
+    },
+    editProfile: async (parent, args, context) => {
+      let user = await func.checkSession(context.session)
+      return await func.users.editProfile(args, user)
     }
   }
 }

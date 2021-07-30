@@ -13,7 +13,8 @@ type Mutation {
   login(username: String!, password: String!, deviceName: String): String,
   postNagging(content: String!): Nagging!,
   deleteNagging(uuid: String!): String,
-  logout: String
+  logout: String,
+  editProfile(username: String, fullname: String, bio: String): String
 }
 
 type User {
