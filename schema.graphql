@@ -21,7 +21,8 @@ type User {
   uuid: String!,
   username: String!,
   fullname: String!,
-  bio: String
+  bio: String,
+  avatar: String
 }
 
 type Session {
