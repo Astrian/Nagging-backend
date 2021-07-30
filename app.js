@@ -27,18 +27,21 @@ const resolvers = {
     login: async (parent, args, context) => {
       if (!args.deviceName) args.deviceName = context.useragent
       let cookie = await func.users.login(args) 
-      context.setCookies.push({name: "session", value: `${cookie.user}, ${cookie.key}`})
+      context.setCookies.push({name: "session", value: `${cookie.uuid}, ${cookie.key}`})
       return 
     },
     postNagging: async (parent, args, context) => {
-      await func.checkSession(context.session)
-      return await func.naggings.new(args.content, context.session.user)
+      let user = await func.checkSession(context.session)
+      return await func.naggings.new(args.content, user)
     },
     deleteNagging: async (parent, args, context) => {
-      console.log(context)
-      await func.checkSession(context.session)
-      await func.naggings.delete(args.uuid, context.session.user)
-      return
+      let user = await func.checkSession(context.session)
+      return await func.naggings.delete(args.uuid, user)
+    },
+    logout: async (parent, args, context) => {
+      let user = await func.checkSession(context.session)
+      context.setCookies.push({name: "session", value: null})
+      return await func.users.logout(context.session.uuid, user)
     }
   }
 }
@@ -55,7 +58,7 @@ const server = new ApolloServer({
     for(let i in cookie) {
       if (cookie[i].split('=')[0] === 'session') {
         let sessionRaw = urldecode(cookie[i].split('=')[1])
-        session.user = sessionRaw.split(', ')[0]
+        session.uuid = sessionRaw.split(', ')[0]
         session.key = sessionRaw.split(', ')[1]
       }
     }

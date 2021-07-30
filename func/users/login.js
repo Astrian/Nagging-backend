@@ -34,7 +34,7 @@ module.exports = async (args) => {
 
   // Return session token
   return {
-    user: res.uuid,
+    uuid,
     key: sessionKey
   }
 }
@@ -51,7 +51,7 @@ const checkPassword = async (password, hash) => {
 const assignUUID = async () => {
   let uuid = uuidv4()
   let res = await util.mongodb.read('sessions', {uuid})
-  if (res.length) uuid = assignUUID()
+  if (res.length) uuid = await assignUUID()
   return uuid
 }
 
