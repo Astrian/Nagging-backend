@@ -2,6 +2,7 @@ const util = require('../../util')
 const bcrypt = require('bcrypt')
 const { v4: uuidv4 } = require('uuid')
 const { ApolloError } = require('apollo-server-errors')
+const md5 = require('md5')
 
 module.exports = async (args) => {
   // Check does a user existed in this server
@@ -19,6 +20,9 @@ module.exports = async (args) => {
 
   // Write default fullname
   args.fullname = args.username
+
+  // Write default avatar
+  args.avatar = `https://www.gravatar.com/avatar/${md5(args.email)}?s=512`
 
   // Write user into database
   await util.mongodb.write('users', [args])

@@ -22,6 +22,7 @@
     "apollo-server-plugin-http-headers": "^0.1.4",
     "bcrypt": "^5.0.1",
     "graphql": "^15.5.1",
+    "md5": "^2.3.0",
     "mongodb": "^4.0.1",
     "urldecode": "^1.0.1",
     "uuid": "^8.3.2"
