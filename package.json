@@ -4,7 +4,8 @@
   "description": "The backend code for Nagging, a personal space for your shattered thoughts. May better than Weibo or Twitter.",
   "main": "app.js",
   "scripts": {
-    "test": "supervisor app.js"
+    "test": "supervisor app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
