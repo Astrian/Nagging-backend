@@ -25,6 +25,7 @@ const resolvers = {
       return
     },
     login: async (parent, args, context) => {
+      if (!args.deviceName) args.deviceName = context.useragent
       let cookie = await func.users.login(args) 
       context.setCookies.push({name: "session", value: `${cookie.user}, ${cookie.key}`})
       return 
@@ -48,6 +49,7 @@ const server = new ApolloServer({
   plugins: [httpHeadersPlugin],
   context: ({ req }) => {
     let cookieRaw = req.headers.cookie || ''
+    let useragent = req.headers['user-agent']
     let cookie = cookieRaw.split('; ')
     let session = {}
     for(let i in cookie) {
@@ -57,7 +59,7 @@ const server = new ApolloServer({
         session.key = sessionRaw.split(', ')[1]
       }
     }
-    return { session, setCookies: new Array(), setHeaders: new Array() }
+    return { session, useragent, setCookies: new Array(), setHeaders: new Array() }
   }
 })
 
