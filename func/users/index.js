@@ -4,5 +4,6 @@ module.exports = {
   login: require('./login'),
   logout: require('./logout'),
   editProfile: require('./editProfile'),
-  changePassword: require('./changePassword')
+  changePassword: require('./changePassword'),
+  logoutFromAnywhere: require('./logoutFromAnywhere')
 }

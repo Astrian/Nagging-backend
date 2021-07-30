@@ -50,6 +50,11 @@ const resolvers = {
     changePassword: async (parent, args, context) => {
       let user = await func.checkSession(context.session)
       return await func.users.changePassword(user, args)
+    },
+    logoutFromAnywhere: async (parent, args, context) => {
+      let user = await func.checkSession(context.session)
+      context.setCookies.push({name: "session", value: null})
+      return await func.users.logoutFromAnywhere(user)
     }
   }
 }
