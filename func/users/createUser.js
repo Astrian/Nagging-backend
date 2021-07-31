@@ -24,6 +24,9 @@ module.exports = async (args) => {
   // Write default avatar
   args.avatar = `https://www.gravatar.com/avatar/${md5(args.email)}?s=512`
 
+  // Write nagging counter
+  args.naggingCount = 0
+
   // Write user into database
   await util.mongodb.write('users', [args])
   return

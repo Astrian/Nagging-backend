@@ -24,7 +24,8 @@ type User {
   username: String!,
   fullname: String!,
   bio: String,
-  avatar: String
+  avatar: String,
+  naggingCount: Int
 }
 
 type Session {
