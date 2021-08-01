@@ -78,7 +78,8 @@ const server = new ApolloServer({
       }
     }
     return { session, useragent, setCookies: new Array(), setHeaders: new Array() }
-  }
+  },
+  cors: {origin: JSON.parse(process.env.NG_CORSDOMAIN), credentials: true}
 })
 
 server.listen(port).then(({ url }) => {
