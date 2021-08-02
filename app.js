@@ -42,7 +42,7 @@ const resolvers = {
     },
     logout: async (parent, args, context) => {
       let user = await func.checkSession(context.session)
-      context.setCookies.push({name: "session", value: null})
+      context.setCookies.push({name: "session", value: null, options : { expires: new Date(0) }})
       return await func.users.logout(context.session.uuid, user)
     },
     editProfile: async (parent, args, context) => {
@@ -55,7 +55,7 @@ const resolvers = {
     },
     logoutFromAnywhere: async (parent, args, context) => {
       let user = await func.checkSession(context.session)
-      context.setCookies.push({name: "session", value: null})
+      context.setCookies.push({name: "session", value: null, options : { expires: new Date(0) }})
       return await func.users.logoutFromAnywhere(user)
     }
   }
