@@ -10,7 +10,7 @@ type Query {
 
 type Mutation {
   createUser(username: String!, password: String!, email: String!, bio: String): String,
-  login(username: String!, password: String!, deviceName: String): String,
+  login(username: String!, password: String!, deviceName: String): Session,
   postNagging(content: String!): Nagging!,
   deleteNagging(uuid: String!): String,
   logout: String,
@@ -29,7 +29,7 @@ type User {
 }
 
 type Session {
-  user: String!,
+  uuid: String!,
   key: String!
 }
 

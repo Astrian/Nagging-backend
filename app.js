@@ -30,7 +30,7 @@ const resolvers = {
       if (!args.deviceName) args.deviceName = context.useragent
       let cookie = await func.users.login(args) 
       context.setCookies.push({name: "session", value: `${cookie.uuid}, ${cookie.key}`})
-      return 
+      return cookie
     },
     postNagging: async (parent, args, context) => {
       let user = await func.checkSession(context.session)
