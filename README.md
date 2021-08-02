@@ -56,7 +56,7 @@ Set environment variables:
 Like this:
 
 ```
-export NG_CORSDOMAIN=["https://nagging-frontend.com"]
+export NG_CORSDOMAIN=["https://my-own-naggings.com"]
 export NG_DBAUTH=nagging:passwordishere
 export NG_DBENDPOINT=cluster7.e8kw9.mongodb.net/?retryWrites=true&w=majority
 export NG_DBNAME=nagging
@@ -76,9 +76,15 @@ npm i
 
 Set environment variables:
 
-- `REACT_APP_GQLSERVER`: Your backend endpoint address, usually is your backend domain with `https://`
+- `REACT_APP_GQLSERVER`: Your backend endpoint address, usually is your backend domain e.g. `https://api.my-own-naggings.com`
 - `REACT_APP_DOMAIN`: Your front end domain with `https://`
 
 Then, run `npm build`, and you can put the folder `build` to your static server. Remeber to set that all the route will return `index.html` because it is a single page application!
 
 Also, you also can deploy it directly to Netlify with Serverside Rendering. You can switch it on in `Site settings` - `Build & deploy` - `Post processing` - `Prerendering`.
+
+### Create your account
+
+`https://my-own-naggings.com/createaccount`
+
+Once you created your account, you can try post your first nagging! The nagging composer is right on homepage.
