@@ -66,17 +66,9 @@ const server = new ApolloServer({
   resolvers,
   plugins: [httpHeadersPlugin],
   context: ({ req }) => {
-    let cookieRaw = req.headers.cookie || ''
+    let sessionRaw = req.headers.session || ''
     let useragent = req.headers['user-agent']
-    let cookie = cookieRaw.split('; ')
-    let session = {}
-    for(let i in cookie) {
-      if (cookie[i].split('=')[0] === 'session') {
-        let sessionRaw = urldecode(cookie[i].split('=')[1])
-        session.uuid = sessionRaw.split(', ')[0]
-        session.key = sessionRaw.split(', ')[1]
-      }
-    }
+    let session = { uuid: sessionRaw.split(', ')[0], key: sessionRaw.split(', ')[1] }
     return { session, useragent, setCookies: new Array(), setHeaders: new Array() }
   },
   cors: {origin: JSON.parse(process.env.NG_CORSDOMAIN), credentials: true}
